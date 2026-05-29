@@ -2,12 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/assets/logo.png";
 
-/* ─────────────────────────────────────────────
-   Gainday Landing Page — brand spec v1
-   Font: Raleway 200-800
-   Palette: strictly B&W per spec
-───────────────────────────────────────────── */
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -1314,8 +1311,7 @@ export default function GaindayLanding() {
       <nav className="nav">
         <div className="nav-inner">
           <a href="#" className="nav-logo">
-            <Mark size={22} />
-            Gainday
+            <Image src={Logo} alt="Gainday" width={122} height={72} style={{ objectFit: "contain" }} />
           </a>
           <ul className="nav-links">
             <li><a href="#how-it-works">How it works</a></li>
@@ -1323,7 +1319,7 @@ export default function GaindayLanding() {
             <li><Link href="/candidates">For candidates</Link></li>
             <li><Link href="/employers">For employers</Link></li>
           </ul>
-          <a href="#challenge" className="btn-nav">Try a challenge</a>
+          <a href="https://forms.gle/7FnnZRmJaFxBJeM38" target="_blank" rel="noopener noreferrer" className="btn-nav">Try a challenge</a>
         </div>
       </nav>
 
@@ -1344,7 +1340,7 @@ export default function GaindayLanding() {
               <strong>role-based challenges</strong> built for real hiring.
             </p>
             <div className="hero-actions">
-              <a href="#challenge" className="btn-primary">
+              <a href="https://forms.gle/7FnnZRmJaFxBJeM38" target="_blank" rel="noopener noreferrer" className="btn-primary">
                 Try a challenge (Demo)
                 <span className="btn-arrow">→</span>
               </a>
@@ -1520,11 +1516,11 @@ export default function GaindayLanding() {
                 <div className="meta-val">Junior</div>
               </div>
             </div>
-            <a href="#" className="btn-primary" style={{ display: "inline-flex" }}>
+            <a href="https://forms.gle/7FnnZRmJaFxBJeM38" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: "inline-flex" }}>
               Start the challenge
               <span className="btn-arrow">→</span>
             </a>
-            <p className="form-note">Opens in a Google Form. No sign-up.</p>
+            <p className="form-note">Opens in a Google Form. No sign-up required.</p>
           </FadeUp>
 
           <FadeUp delay={140}>
@@ -1742,7 +1738,7 @@ export default function GaindayLanding() {
           <FadeUp delay={120}>
             <div className="cta-btns">
               {[
-                { label: "Try a challenge (Demo)", href: "#challenge" },
+                { label: "Try a challenge (Demo)", href: "https://forms.gle/7FnnZRmJaFxBJeM38" },
                 { label: "Join candidate waitlist", href: "/candidates" },
                 { label: "Join employer waitlist", href: "/employers" },
               ].map((b) => (
@@ -1762,8 +1758,7 @@ export default function GaindayLanding() {
           <div className="footer-top">
             <div>
               <a href="#" className="nav-logo" style={{ textDecoration: "none" }}>
-                <Mark size={22} />
-                Gainday
+                <Image src="/assets/logo.PNG" alt="Gainday" width={32} height={32} style={{ objectFit: "contain" }} />
               </a>
               <p className="footer-desc">
                 Built for proof, not paper. Show employers what you can actually do — not just what your CV says you&apos;ve done. London, 2026.

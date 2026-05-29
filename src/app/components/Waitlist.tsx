@@ -2,19 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
+import Logo from '@/app/assets/logo.png';
 /* ─────────────────────────────────────────────
    Shared Waitlist Page — Gainday brand spec
 ───────────────────────────────────────────── */
 
-function Mark({ size = 22, dark = false }: { size?: number; dark?: boolean }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 22 22" fill="none">
-      <rect width="22" height="22" fill={dark ? "#fff" : "#0A0A0A"} />
-      <rect x="5" y="5" width="12" height="12" fill={dark ? "#0A0A0A" : "#fff"} />
-    </svg>
-  );
-}
 
 type Variant = "candidates" | "employers";
 
@@ -39,7 +32,7 @@ const content = {
     successHeading: "You're on the list.",
     successSub: "We'll be in touch when the candidate side goes live. In the meantime, try the demo challenge.",
     successCta: "Try the demo challenge",
-    successHref: "/#challenge",
+    successHref: "https://forms.gle/7FnnZRmJaFxBJeM38",
     sideKicker: "What to expect",
     sideItems: [
       { label: "Challenge length", value: "45 – 90 min" },
@@ -66,7 +59,7 @@ const content = {
     successHeading: "Request received.",
     successSub: "We'll be in touch shortly with next steps for employer access. In the meantime, you can try the demo as a candidate to see what your applicants experience.",
     successCta: "Try the candidate demo",
-    successHref: "/#challenge",
+    successHref: "https://forms.gle/7FnnZRmJaFxBJeM38",
     sideKicker: "How it works for employers",
     sideItems: [
       { label: "Cohort size", value: "Limited — UK first" },
@@ -496,8 +489,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
       <nav className="wl-nav">
         <div className="wl-nav-inner">
           <Link href="/" className="wl-logo">
-            <Mark size={22} />
-            Gainday
+            <Image src={Logo} alt="Gainday" width={122} height={72} style={{ objectFit: "contain" }} />
           </Link>
           <ul className="wl-nav-links">
             <li><Link href="/#how-it-works">How it works</Link></li>
@@ -505,7 +497,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
             <li><Link href="/candidates">For candidates</Link></li>
             <li><Link href="/employers">For employers</Link></li>
           </ul>
-          <Link href="/#challenge" className="btn-nav">Try a challenge</Link>
+          <a href="https://forms.gle/7FnnZRmJaFxBJeM38" target="_blank" rel="noopener noreferrer" className="btn-nav">Try a challenge</a>
         </div>
       </nav>
 
