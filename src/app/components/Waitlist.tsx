@@ -4,9 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from '@/app/assets/logo.png';
-/* ─────────────────────────────────────────────
+/* ─
    Shared Waitlist Page — Gainday brand spec
-───────────────────────────────────────────── */
+─ */
 
 
 type Variant = "candidates" | "employers";
@@ -134,7 +134,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           -webkit-font-smoothing: antialiased;
         }
 
-        /* ── NAV ── */
+        /*  NAV  */
         .wl-nav {
           position: sticky;
           top: 0;
@@ -196,7 +196,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         }
         .btn-nav:hover { background: #222; }
 
-        /* ── MAIN ── */
+        /*  MAIN  */
         .wl-main {
           flex: 1;
           max-width: var(--container);
@@ -449,7 +449,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           padding: 0 2px;
         }
 
-        /* ── FOOTER ── */
+        /*  FOOTER  */
         .wl-footer {
           border-top: 1px solid var(--line);
           padding: 28px 32px;
@@ -471,7 +471,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         }
         .wl-footer a:hover { color: var(--ink); }
 
-        /* ── MOBILE ── */
+        /*  MOBILE  */
         @media (max-width: 860px) {
           .wl-nav-links { display: none; }
           .wl-nav-inner { padding: 0 20px; }

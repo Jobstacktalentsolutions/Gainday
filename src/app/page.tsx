@@ -50,7 +50,7 @@ function Mark({ size = 22, dark = false }: { size?: number; dark?: boolean }) {
 }
 
 
-/* ── PREVIEW FLOW COMPONENT ── */
+/*  PREVIEW FLOW COMPONENT  */
 type PreviewTab = "job" | "challenge" | "scorecard";
 
 function PreviewFlow() {
@@ -85,7 +85,7 @@ function PreviewFlow() {
         ))}
       </div>
 
-      {/* ── TAB: Job post ── */}
+      {/*  TAB: Job post  */}
       {tab === "job" && (
         <div style={{ padding: "22px 22px 24px" }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 10 }}>Example role</div>
@@ -115,7 +115,7 @@ function PreviewFlow() {
         </div>
       )}
 
-      {/* ── TAB: Challenge ── */}
+      {/*  TAB: Challenge  */}
       {tab === "challenge" && !submitted && (
         <div style={{ padding: "22px 22px 24px" }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 12 }}>The challenge</div>
@@ -155,7 +155,7 @@ function PreviewFlow() {
         </div>
       )}
 
-      {/* ── TAB: Challenge — submitted state ── */}
+      {/*  TAB: Challenge — submitted state  */}
       {tab === "challenge" && submitted && (
         <div style={{ padding: "22px 22px 24px", textAlign: "center" }}>
           <div style={{ width: 44, height: 44, background: "var(--ink)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
@@ -169,7 +169,7 @@ function PreviewFlow() {
         </div>
       )}
 
-      {/* ── TAB: Score card ── */}
+      {/*  TAB: Score card  */}
       {tab === "scorecard" && (
         <div style={{ padding: "22px 22px 24px" }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 4 }}>Candidate profile — as seen by employer</div>
@@ -293,14 +293,14 @@ export default function GaindayLanding() {
           -webkit-font-smoothing: antialiased;
         }
 
-        /* ── CONTAINER ── */
+        /*  CONTAINER  */
         .container {
           max-width: var(--container);
           margin: 0 auto;
           padding: 0 32px;
         }
 
-        /* ── NAV ── */
+        /*  NAV  */
         .nav {
           position: sticky;
           top: 0;
@@ -346,7 +346,7 @@ export default function GaindayLanding() {
         }
         .nav-links a:hover { color: var(--ink); }
 
-        /* ── BUTTONS ── */
+        /*  BUTTONS  */
         .btn-primary {
           background: var(--ink);
           color: #fff;
@@ -404,7 +404,7 @@ export default function GaindayLanding() {
         }
         .btn-nav:hover { background: #222; }
 
-        /* ── KICKER / PILL ── */
+        /*  KICKER / PILL  */
         .kicker {
           display: inline-block;
           border: 1px solid var(--line-2);
@@ -432,7 +432,7 @@ export default function GaindayLanding() {
           line-height: 1;
         }
 
-        /* ── HERO ── */
+        /*  HERO  */
         .hero {
           padding: 96px 0 104px;
         }
@@ -611,7 +611,7 @@ export default function GaindayLanding() {
           color: var(--ink-4);
         }
 
-        /* ── TICKER ── */
+        /*  TICKER  */
         .ticker {
           background: var(--tint);
           border-top: 1px solid var(--line);
@@ -646,7 +646,7 @@ export default function GaindayLanding() {
         }
         .ticker-sep { color: var(--line-2); font-size: 10px; }
 
-        /* ── SECTION DEFAULTS ── */
+        /*  SECTION DEFAULTS  */
         .section-pad { padding: 96px 0; }
         .section-pad-sm { padding: 88px 0; }
 
@@ -673,7 +673,7 @@ export default function GaindayLanding() {
           margin: 0 auto 56px;
         }
 
-        /* ── FEATURE CARDS ── */
+        /*  FEATURE CARDS  */
         .cards-3 {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -732,7 +732,7 @@ export default function GaindayLanding() {
           letter-spacing: -0.005em;
         }
 
-        /* ── CHALLENGE BAND ── */
+        /*  CHALLENGE BAND  */
         .band {
           background: var(--tint);
           border-top: 1px solid var(--line);
@@ -903,7 +903,7 @@ export default function GaindayLanding() {
         .answer-box:focus { border-color: var(--ink-4); background: var(--bg); }
 
 
-        /* ── DEEP DIVE SECTIONS ── */
+        /*  DEEP DIVE SECTIONS  */
         .deep-section {
           padding: 96px 0;
           border-top: 1px solid var(--line);
@@ -1044,7 +1044,7 @@ export default function GaindayLanding() {
           .deep-section { padding: 64px 0; }
         }
 
-        /* ── AUDIENCE SPLIT ── */
+        /*  AUDIENCE SPLIT  */
         .audience-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -1146,7 +1146,7 @@ export default function GaindayLanding() {
         .aud-card.dark .circle-btn { border-color: rgba(255,255,255,0.25); color: #fff; }
         .aud-card.dark .circle-btn:hover { background: #fff; color: var(--ink); border-color: #fff; }
 
-        /* ── FAQ ── */
+        /*  FAQ  */
         .faq-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -1168,7 +1168,7 @@ export default function GaindayLanding() {
           line-height: 1.65;
         }
 
-        /* ── CTA DARK BAND ── */
+        /*  CTA DARK BAND  */
         .cta-band {
           background: var(--ink);
           padding: 96px 0;
@@ -1235,7 +1235,7 @@ export default function GaindayLanding() {
         }
         .cta-row-btn:hover .btn-arrow { transform: translateX(4px); }
 
-        /* ── FOOTER ── */
+        /*  FOOTER  */
         .footer { padding: 68px 0 32px; border-top: 1px solid var(--line); }
         .footer-inner {
           max-width: var(--container);
@@ -1285,7 +1285,7 @@ export default function GaindayLanding() {
           color: var(--ink-4);
         }
 
-        /* ── MOBILE ── */
+        /*  MOBILE  */
         @media (max-width: 900px) {
           .nav-links { display: none; }
           .nav-inner { padding: 0 20px; }
@@ -1307,7 +1307,7 @@ export default function GaindayLanding() {
         }
       `}</style>
 
-      {/* ── NAV ── */}
+      {/*  NAV  */}
       <nav className="nav">
         <div className="nav-inner">
           <a href="#" className="nav-logo">
@@ -1323,7 +1323,7 @@ export default function GaindayLanding() {
         </div>
       </nav>
 
-      {/* ── HERO ── */}
+      {/*  HERO  */}
       <section className="hero">
         <div className="hero-inner">
           <FadeUp delay={0}>
@@ -1412,7 +1412,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/* ── TICKER ── */}
+      {/*  TICKER  */}
       <div className="ticker">
         <span className="ticker-label">Built with input from</span>
         <div className="ticker-items">
@@ -1425,7 +1425,7 @@ export default function GaindayLanding() {
         </div>
       </div>
 
-      {/* ── HOW IT WORKS ── */}
+      {/*  HOW IT WORKS  */}
       <section className="section-pad" id="how-it-works">
         <div className="container">
           <FadeUp>
@@ -1494,7 +1494,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/* ── CHALLENGE BAND ── */}
+      {/*  CHALLENGE BAND  */}
       <section className="band" id="challenge">
         <div className="band-inner">
           <FadeUp delay={0}>
@@ -1530,7 +1530,7 @@ export default function GaindayLanding() {
       </section>
 
 
-      {/* ── CANDIDATE DEEP DIVE ── */}
+      {/*  CANDIDATE DEEP DIVE  */}
       <section className="deep-section" id="for-candidates">
         <div className="deep-inner">
           <FadeUp delay={0}>
@@ -1574,7 +1574,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/* ── EMPLOYER DEEP DIVE ── */}
+      {/*  EMPLOYER DEEP DIVE  */}
       <section className="deep-section dark-bg" id="for-employers">
         <div className="deep-inner">
           <FadeUp delay={0}>
@@ -1615,7 +1615,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/* ── AUDIENCE SPLIT ── */}
+      {/*  AUDIENCE SPLIT  */}
       <section className="section-pad" id="candidates">
         <div className="container">
           <FadeUp>
@@ -1687,7 +1687,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/* ── FAQ ── */}
+      {/*  FAQ  */}
       <section className="section-pad-sm" style={{ borderTop: "1px solid var(--line)" }}>
         <div className="container">
           <FadeUp>
@@ -1722,7 +1722,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/* ── CTA DARK BAND ── */}
+      {/*  CTA DARK BAND  */}
       <section className="cta-band">
         <div className="cta-inner">
           <FadeUp delay={0}>
@@ -1752,7 +1752,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
+      {/*  FOOTER  */}
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-top">
