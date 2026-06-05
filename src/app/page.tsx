@@ -3,8 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/assets/logo.png";
 
+/* ─────────────────────────────────────────────
+   Gainday Landing Page — brand spec v1
+   Font: Raleway 200-800
+   Palette: strictly B&W per spec
+───────────────────────────────────────────── */
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,7 +54,7 @@ function Mark({ size = 22, dark = false }: { size?: number; dark?: boolean }) {
 }
 
 
-/*  PREVIEW FLOW COMPONENT  */
+/* ── PREVIEW FLOW COMPONENT ── */
 type PreviewTab = "job" | "challenge" | "scorecard";
 
 function PreviewFlow() {
@@ -85,7 +89,7 @@ function PreviewFlow() {
         ))}
       </div>
 
-      {/*  TAB: Job post  */}
+      {/* ── TAB: Job post ── */}
       {tab === "job" && (
         <div style={{ padding: "22px 22px 24px" }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 10 }}>Example role</div>
@@ -115,7 +119,7 @@ function PreviewFlow() {
         </div>
       )}
 
-      {/*  TAB: Challenge  */}
+      {/* ── TAB: Challenge ── */}
       {tab === "challenge" && !submitted && (
         <div style={{ padding: "22px 22px 24px" }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 12 }}>The challenge</div>
@@ -155,7 +159,7 @@ function PreviewFlow() {
         </div>
       )}
 
-      {/*  TAB: Challenge — submitted state  */}
+      {/* ── TAB: Challenge — submitted state ── */}
       {tab === "challenge" && submitted && (
         <div style={{ padding: "22px 22px 24px", textAlign: "center" }}>
           <div style={{ width: 44, height: 44, background: "var(--ink)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
@@ -169,7 +173,7 @@ function PreviewFlow() {
         </div>
       )}
 
-      {/*  TAB: Score card  */}
+      {/* ── TAB: Score card ── */}
       {tab === "scorecard" && (
         <div style={{ padding: "22px 22px 24px" }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 4 }}>Candidate profile — as seen by employer</div>
@@ -293,14 +297,14 @@ export default function GaindayLanding() {
           -webkit-font-smoothing: antialiased;
         }
 
-        /*  CONTAINER  */
+        /* ── CONTAINER ── */
         .container {
           max-width: var(--container);
           margin: 0 auto;
           padding: 0 32px;
         }
 
-        /*  NAV  */
+        /* ── NAV ── */
         .nav {
           position: sticky;
           top: 0;
@@ -346,7 +350,7 @@ export default function GaindayLanding() {
         }
         .nav-links a:hover { color: var(--ink); }
 
-        /*  BUTTONS  */
+        /* ── BUTTONS ── */
         .btn-primary {
           background: var(--ink);
           color: #fff;
@@ -404,7 +408,7 @@ export default function GaindayLanding() {
         }
         .btn-nav:hover { background: #222; }
 
-        /*  KICKER / PILL  */
+        /* ── KICKER / PILL ── */
         .kicker {
           display: inline-block;
           border: 1px solid var(--line-2);
@@ -432,7 +436,7 @@ export default function GaindayLanding() {
           line-height: 1;
         }
 
-        /*  HERO  */
+        /* ── HERO ── */
         .hero {
           padding: 96px 0 104px;
         }
@@ -494,6 +498,17 @@ export default function GaindayLanding() {
           gap: 12px;
           margin-bottom: 28px;
           flex-wrap: wrap;
+        }
+        .hero-actions a {
+          flex: 1;
+          justify-content: center;
+          min-width: 200px;
+        }
+        .hero-actions a {
+          flex: 1;
+          min-width: 160px;
+          justify-content: center;
+          text-align: center;
         }
         .hero-proof {
           display: flex;
@@ -611,7 +626,7 @@ export default function GaindayLanding() {
           color: var(--ink-4);
         }
 
-        /*  TICKER  */
+        /* ── TICKER ── */
         .ticker {
           background: var(--tint);
           border-top: 1px solid var(--line);
@@ -646,7 +661,7 @@ export default function GaindayLanding() {
         }
         .ticker-sep { color: var(--line-2); font-size: 10px; }
 
-        /*  SECTION DEFAULTS  */
+        /* ── SECTION DEFAULTS ── */
         .section-pad { padding: 96px 0; }
         .section-pad-sm { padding: 88px 0; }
 
@@ -673,18 +688,26 @@ export default function GaindayLanding() {
           margin: 0 auto 56px;
         }
 
-        /*  FEATURE CARDS  */
+        /* ── FEATURE CARDS ── */
         .cards-3 {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 18px;
+          align-items: stretch;
         }
+        .cards-3 > div { height: 100%; }
         .feat-card {
           border: 1px solid var(--line);
           border-radius: var(--r-card);
           padding: 32px;
           background: var(--bg);
+          display: flex;
+          flex-direction: column;
+          height: 100%;
           transition: box-shadow 0.25s, transform 0.25s;
+        }
+        .feat-desc {
+          flex: 1;
         }
         .feat-card:hover {
           box-shadow: var(--shadow-hover);
@@ -721,8 +744,7 @@ export default function GaindayLanding() {
           padding: 22px 32px;
           background: var(--tint);
           border-radius: 0 10px 10px 0;
-          max-width: 860px;
-          margin: 48px auto 0;
+          margin: 48px 0 0 0;
         }
         .callout p {
           font-size: 16px;
@@ -732,7 +754,7 @@ export default function GaindayLanding() {
           letter-spacing: -0.005em;
         }
 
-        /*  CHALLENGE BAND  */
+        /* ── CHALLENGE BAND ── */
         .band {
           background: var(--tint);
           border-top: 1px solid var(--line);
@@ -772,6 +794,12 @@ export default function GaindayLanding() {
           grid-template-columns: 1fr 1fr;
           gap: 12px;
           margin-bottom: 32px;
+          align-items: stretch;
+        }
+        .meta-box {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
         .meta-box {
           border: 1px solid var(--line);
@@ -903,7 +931,7 @@ export default function GaindayLanding() {
         .answer-box:focus { border-color: var(--ink-4); background: var(--bg); }
 
 
-        /*  DEEP DIVE SECTIONS  */
+        /* ── DEEP DIVE SECTIONS ── */
         .deep-section {
           padding: 96px 0;
           border-top: 1px solid var(--line);
@@ -1044,7 +1072,7 @@ export default function GaindayLanding() {
           .deep-section { padding: 64px 0; }
         }
 
-        /*  AUDIENCE SPLIT  */
+        /* ── AUDIENCE SPLIT ── */
         .audience-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -1146,13 +1174,17 @@ export default function GaindayLanding() {
         .aud-card.dark .circle-btn { border-color: rgba(255,255,255,0.25); color: #fff; }
         .aud-card.dark .circle-btn:hover { background: #fff; color: var(--ink); border-color: #fff; }
 
-        /*  FAQ  */
+        /* ── FAQ ── */
         .faq-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 44px 72px;
           max-width: 900px;
           margin: 0 auto;
+        }
+        .faq-grid > div:last-child:nth-child(odd) {
+          grid-column: 1 / -1;
+          max-width: calc(50% - 36px);
         }
         .faq-q {
           font-size: 16px;
@@ -1168,7 +1200,7 @@ export default function GaindayLanding() {
           line-height: 1.65;
         }
 
-        /*  CTA DARK BAND  */
+        /* ── CTA DARK BAND ── */
         .cta-band {
           background: var(--ink);
           padding: 96px 0;
@@ -1198,11 +1230,11 @@ export default function GaindayLanding() {
         .cta-desc {
           font-size: 15px;
           font-weight: 400;
-          color: rgba(255,255,255,0.6);
+          color: rgba(255,255,255,0.85);
           line-height: 1.65;
           margin-bottom: 20px;
         }
-        .cta-desc strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+        .cta-desc strong { color: #fff; font-weight: 600; }
         .cta-eyebrow {
           font-size: 11.5px;
           font-weight: 600;
@@ -1210,7 +1242,8 @@ export default function GaindayLanding() {
           text-transform: uppercase;
           color: rgba(255,255,255,0.4);
         }
-        .cta-btns { display: flex; flex-direction: column; gap: 10px; }
+        .cta-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .cta-row-btn { width: 100%; }
         .cta-row-btn {
           background: #fff;
           color: var(--ink);
@@ -1235,7 +1268,7 @@ export default function GaindayLanding() {
         }
         .cta-row-btn:hover .btn-arrow { transform: translateX(4px); }
 
-        /*  FOOTER  */
+        /* ── FOOTER ── */
         .footer { padding: 68px 0 32px; border-top: 1px solid var(--line); }
         .footer-inner {
           max-width: var(--container);
@@ -1285,7 +1318,7 @@ export default function GaindayLanding() {
           color: var(--ink-4);
         }
 
-        /*  MOBILE  */
+        /* ── MOBILE ── */
         @media (max-width: 900px) {
           .nav-links { display: none; }
           .nav-inner { padding: 0 20px; }
@@ -1307,11 +1340,11 @@ export default function GaindayLanding() {
         }
       `}</style>
 
-      {/*  NAV  */}
+      {/* ── NAV ── */}
       <nav className="nav">
         <div className="nav-inner">
           <a href="#" className="nav-logo">
-            <Image src={Logo} alt="Gainday" width={122} height={72} style={{ objectFit: "contain" }} />
+            <Image src="/assets/logo.jpeg" alt="Gainday" width={32} height={32} style={{ objectFit: "contain" }} />
           </a>
           <ul className="nav-links">
             <li><a href="#how-it-works">How it works</a></li>
@@ -1323,7 +1356,7 @@ export default function GaindayLanding() {
         </div>
       </nav>
 
-      {/*  HERO  */}
+      {/* ── HERO ── */}
       <section className="hero">
         <div className="hero-inner">
           <FadeUp delay={0}>
@@ -1412,7 +1445,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/*  TICKER  */}
+      {/* ── TICKER ── */}
       <div className="ticker">
         <span className="ticker-label">Built with input from</span>
         <div className="ticker-items">
@@ -1425,7 +1458,7 @@ export default function GaindayLanding() {
         </div>
       </div>
 
-      {/*  HOW IT WORKS  */}
+      {/* ── HOW IT WORKS ── */}
       <section className="section-pad" id="how-it-works">
         <div className="container">
           <FadeUp>
@@ -1494,7 +1527,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/*  CHALLENGE BAND  */}
+      {/* ── CHALLENGE BAND ── */}
       <section className="band" id="challenge">
         <div className="band-inner">
           <FadeUp delay={0}>
@@ -1530,7 +1563,7 @@ export default function GaindayLanding() {
       </section>
 
 
-      {/*  CANDIDATE DEEP DIVE  */}
+      {/* ── CANDIDATE DEEP DIVE ── */}
       <section className="deep-section" id="for-candidates">
         <div className="deep-inner">
           <FadeUp delay={0}>
@@ -1574,7 +1607,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/*  EMPLOYER DEEP DIVE  */}
+      {/* ── EMPLOYER DEEP DIVE ── */}
       <section className="deep-section dark-bg" id="for-employers">
         <div className="deep-inner">
           <FadeUp delay={0}>
@@ -1615,7 +1648,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/*  AUDIENCE SPLIT  */}
+      {/* ── AUDIENCE SPLIT ── */}
       <section className="section-pad" id="candidates">
         <div className="container">
           <FadeUp>
@@ -1687,7 +1720,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/*  FAQ  */}
+      {/* ── FAQ ── */}
       <section className="section-pad-sm" style={{ borderTop: "1px solid var(--line)" }}>
         <div className="container">
           <FadeUp>
@@ -1722,7 +1755,7 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/*  CTA DARK BAND  */}
+      {/* ── CTA DARK BAND ── */}
       <section className="cta-band">
         <div className="cta-inner">
           <FadeUp delay={0}>
@@ -1752,13 +1785,13 @@ export default function GaindayLanding() {
         </div>
       </section>
 
-      {/*  FOOTER  */}
+      {/* ── FOOTER ── */}
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-top">
             <div>
               <a href="#" className="nav-logo" style={{ textDecoration: "none" }}>
-                <Image src="/assets/logo.PNG" alt="Gainday" width={32} height={32} style={{ objectFit: "contain" }} />
+                <Image src="/assets/logo.jpeg" alt="Gainday" width={32} height={32} style={{ objectFit: "contain" }} />
               </a>
               <p className="footer-desc">
                 Built for proof, not paper. Show employers what you can actually do — not just what your CV says you&apos;ve done. London, 2026.

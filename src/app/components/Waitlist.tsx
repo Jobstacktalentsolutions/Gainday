@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from '@/app/assets/logo.png';
 /* ─
-   Shared Waitlist Page — Gainday brand spec
+   Shared Waitlist Page Gainday brand spec
 ─ */
 
 
@@ -23,7 +23,7 @@ const content = {
     sub: "Gainday is opening its first cohort for candidates. Join the waitlist and we'll be in touch when your side goes live.",
     bullets: [
       "Complete a role-based challenge as your application.",
-      "Your capability score is what employers see first — your CV provides context.",
+      "Your capability score is what employers see first your CV provides context.",
       "Get matched with employers who've seen your reasoning, not just your résumé.",
     ],
     inputLabel: "Your email address",
@@ -41,7 +41,7 @@ const content = {
       { label: "Better signal of capability", value: "More visibility to employers" },
     ],
     sideNote:
-      "Challenges are built from real job requirements. Every submission is scored against structured, role-specific criteria — with human oversight throughout.",
+      "Challenges are built from real job requirements. Every submission is scored against structured, role-specific criteria with human oversight throughout.",
   },
   employers: {
     kicker: "For employers",
@@ -50,7 +50,7 @@ const content = {
     sub: "Gainday is opening its first employer cohort in the United Kingdom. Join the waitlist and we'll reach out when employer access opens.",
     bullets: [
       "Receive a ranked shortlist of candidates who've already demonstrated capability.",
-      "Challenges are custom-built for your team and role — not generic assessments.",
+      "Challenges are custom-built for your team and role not generic assessments.",
       "Replace the CV black hole with structured, scored performance data.",
     ],
     inputLabel: "Work email address",
@@ -62,12 +62,12 @@ const content = {
     successHref: "https://forms.gle/7FnnZRmJaFxBJeM38",
     sideKicker: "How it works for employers",
     sideItems: [
-      { label: "Cohort size", value: "Limited — UK first" },
+      { label: "Cohort size", value: "Limited UK first" },
       { label: "Challenge type", value: "Role-specific" },
-      { label: "Pricing", value: "Pay-per-unlock bundle / Subscription — early access rate" },
+      { label: "Pricing", value: "Pay-per-unlock bundle / Subscription early access rate" },
     ],
     sideNote:
-      "Each challenge is reviewed by the Gainday team before going live. You'll receive a ranked candidate list with scored submissions — not another pile of applications.",
+      "Each challenge is reviewed by the Gainday team before going live. You'll receive a ranked candidate list with scored submissions not another pile of applications.",
   },
 } as const;
 
@@ -86,7 +86,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
     if (!isValid) return;
     setStatus("loading");
     setErrorMsg("");
-    // Simulate API call — replace with your actual endpoint
+    // Simulate API call replace with your actual endpoint
     await new Promise((r) => setTimeout(r, 1100));
     try {
       // await fetch("/api/waitlist", { method: "POST", body: JSON.stringify({ email, variant }) })
@@ -262,7 +262,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         .wl-bullets li:last-child { border-bottom: 1px solid var(--line); }
         .wl-dash { flex-shrink: 0; color: var(--ink-4); margin-top: 2px; font-size: 14px; }
 
-        /* Right col — form card */
+        /* Right col form card */
         .wl-card {
           border: 1px solid var(--line-2);
           border-radius: var(--r-card);
@@ -503,7 +503,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
 
       {/* MAIN */}
       <main className="wl-main">
-        {/* Left — copy */}
+        {/* Left copy */}
         <div>
           <span className="wl-kicker">{c.kicker}</span>
           <h1 className="wl-h1">
@@ -535,7 +535,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           <p className="side-note">{c.sideNote}</p>
         </div>
 
-        {/* Right — form card */}
+        {/* Right form card */}
         <div>
           <div className="wl-card">
             <div className="wl-card-head">
