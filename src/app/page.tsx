@@ -3,12 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-/* ─────────────────────────────────────────────
-   Gainday Landing Page — brand spec v1
-   Font: Raleway 200-800
-   Palette: strictly B&W per spec
-───────────────────────────────────────────── */
+import  Logo  from "../assets/logo.png";
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -123,10 +118,10 @@ function PreviewFlow() {
       {tab === "challenge" && !submitted && (
         <div style={{ padding: "22px 22px 24px" }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 12 }}>The challenge</div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--ink-3)", marginBottom: 4 }}>Role: Junior Finance Analyst — London Fintech Startup</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--ink-3)", marginBottom: 4 }}>Role: Junior Finance Analyst London Fintech Startup</div>
           <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink)", margin: "14px 0 6px" }}>Your manager sends you this message:</div>
           <p style={{ fontSize: 13.5, fontWeight: 400, color: "var(--ink-2)", lineHeight: 1.65, fontStyle: "italic", marginBottom: 16, borderLeft: "3px solid var(--line-2)", paddingLeft: 12 }}>
-            &quot;Hey — I&apos;ve pulled last month&apos;s numbers quickly. Can you take a look and tell me: which figure looks wrong, why you think that, and what you&apos;d do next? Just a few sentences is fine.&quot;
+            &quot;Hey I&apos;ve pulled last month&apos;s numbers quickly. Can you take a look and tell me: which figure looks wrong, why you think that, and what you&apos;d do next? Just a few sentences is fine.&quot;
           </p>
           <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink)", marginBottom: 10 }}>Last month&apos;s snapshot:</div>
           <div style={{ border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", marginBottom: 16 }}>
@@ -159,7 +154,7 @@ function PreviewFlow() {
         </div>
       )}
 
-      {/* ── TAB: Challenge — submitted state ── */}
+      {/* ── TAB: Challenge submitted state ── */}
       {tab === "challenge" && submitted && (
         <div style={{ padding: "22px 22px 24px", textAlign: "center" }}>
           <div style={{ width: 44, height: 44, background: "var(--ink)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
@@ -176,7 +171,7 @@ function PreviewFlow() {
       {/* ── TAB: Score card ── */}
       {tab === "scorecard" && (
         <div style={{ padding: "22px 22px 24px" }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 4 }}>Candidate profile — as seen by employer</div>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 4 }}>Candidate profile as seen by employer</div>
           <div style={{ fontSize: 12, fontWeight: 400, fontStyle: "italic", color: "var(--ink-4)", marginBottom: 14 }}>Name and contact details hidden until unlocked</div>
 
           {/* Meta row */}
@@ -239,7 +234,7 @@ function PreviewFlow() {
           {/* Submission preview */}
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", color: "var(--ink)", marginBottom: 8 }}>Submission preview</div>
           <div style={{ background: "var(--tint)", border: "1px solid var(--line)", borderRadius: 8, padding: "12px 14px", fontSize: 13, color: "var(--ink-2)", lineHeight: 1.65, fontStyle: "italic", marginBottom: 16 }}>
-            &quot;The gross profit figure looks incorrect — revenue of £85,000 minus COGS of £12,000 should give £73,000, not £61,000. This suggests either a data entry error or an unrecorded cost of around £12,000. I&apos;d flag this to the finance manager immediately and cross-check against the raw transaction data before month-end reporting.&quot;
+            &quot;The gross profit figure looks incorrect revenue of £85,000 minus COGS of £12,000 should give £73,000, not £61,000. This suggests either a data entry error or an unrecorded cost of around £12,000. I&apos;d flag this to the finance manager immediately and cross-check against the raw transaction data before month-end reporting.&quot;
           </div>
 
           {/* Unlock CTA */}
@@ -1002,7 +997,7 @@ export default function GaindayLanding() {
         }
         .deep-cta:hover .btn-arrow { transform: translateX(3px); }
 
-        /* Right side — stat / proof panel */
+        /* Right side stat / proof panel */
         .proof-panel {
           border: 1px solid var(--line);
           border-radius: var(--r-card);
@@ -1344,7 +1339,7 @@ export default function GaindayLanding() {
       <nav className="nav">
         <div className="nav-inner">
           <a href="#" className="nav-logo">
-            <Image src="/assets/logo.jpeg" alt="Gainday" width={32} height={32} style={{ objectFit: "contain" }} />
+            <Image src={Logo} alt="Gainday" width={65} height={3} style={{ objectFit: "contain" }} />
           </a>
           <ul className="nav-links">
             <li><a href="#how-it-works">How it works</a></li>
@@ -1369,7 +1364,7 @@ export default function GaindayLanding() {
               <span className="hero-h1-light">Gainday proves your ability.</span>
             </h1>
             <p className="hero-lede">
-              Show employers what you can actually do — through{" "}
+              Show employers what you can actually do through{" "}
               <strong>role-based challenges</strong> built for real hiring.
             </p>
             <div className="hero-actions">
@@ -1470,7 +1465,7 @@ export default function GaindayLanding() {
               <span className="section-heading-light">Here&apos;s what replaces it.</span>
             </h2>
             <p className="section-sub">
-              When every CV looks polished, how do you know who can actually do the job? Too many applications. Too little proof. Gainday helps candidates demonstrate capability — and helps employers identify it faster.
+              When every CV looks polished, how do you know who can actually do the job? Too many applications. Too little proof. Gainday helps candidates demonstrate capability and helps employers identify it faster.
             </p>
           </FadeUp>
           <div className="cards-3">
@@ -1483,7 +1478,7 @@ export default function GaindayLanding() {
                   </svg>
                 ),
                 title: "Real work, not keyword matching",
-                desc: "Candidates complete a role-based challenge built from actual job tasks — not a quiz, not a keyword filter.",
+                desc: "Candidates complete a role-based challenge built from actual job tasks. Not a quiz, not a keyword filter.",
                 delay: 0,
               },
               {
@@ -1494,7 +1489,7 @@ export default function GaindayLanding() {
                   </svg>
                 ),
                 title: "Built for signal, not busywork",
-                desc: "Short enough to be fair. Deep enough to reveal capability.",
+                desc: "Timed well enough to be fair and deep enough to reveal capability.",
                 delay: 80,
               },
               {
@@ -1504,7 +1499,7 @@ export default function GaindayLanding() {
                   </svg>
                 ),
                 title: "Capability first. Context second.",
-                desc: "Employers see demonstrated performance first — then use CVs and background as supporting context.",
+                desc: "Employers see demonstrated performance first then use CVs and background as supporting context.",
                 delay: 160,
               },
             ].map((c) => (
@@ -1537,7 +1532,7 @@ export default function GaindayLanding() {
               <span className="band-h2-light">Try the 3-minute challenge.</span>
             </h2>
             <p className="band-desc">
-              You&apos;ve just joined a small London startup as a junior finance assistant. Your manager pings you the numbers and asks you what you think. You have a blank box and a few minutes — show, on the record, how you think.
+              You&apos;ve just joined a small London startup as a junior finance assistant. Your manager pings you the numbers and asks you what you think. You have a blank box and a few minutes show, on the record, how you think.
             </p>
             <div className="meta-pair">
               <div className="meta-box">
@@ -1573,7 +1568,7 @@ export default function GaindayLanding() {
               Your CV can only describe what you&apos;ve done. It can&apos;t show what you&apos;re capable of right now.
             </p>
             <p className="deep-body">
-              In a pile of hundreds of AI-polished applications, yours gets lost before a human reads it. Gainday gives you a way to prove your thinking directly — through a real task, scored fairly, seen by employers who are actually hiring.
+              In a pile of hundreds of AI-polished applications, yours gets lost before a human reads it. Gainday gives you a way to prove your thinking directly through a real task, scored fairly, seen by employers who are actually hiring.
             </p>
             <p className="deep-body" style={{ marginBottom: 32 }}>
               Get matched with employers who&apos;ve already seen what you can do.
@@ -1592,7 +1587,7 @@ export default function GaindayLanding() {
                 { num: "01", title: "Prove thinking, not tenure", desc: "A real task shows more in 60 minutes than a CV shows in 60 seconds." },
                 { num: "02", title: "Fair scoring, not gut feel", desc: "Every submission is assessed against the same structured criteria. No interviewer bias on step one." },
                 { num: "03", title: "Seen before you're screened out", desc: "Employers see your capability score before they see your name or university." },
-                { num: "04", title: "Matched, not mass-applied", desc: "You reach employers who are actively hiring for your challenge type — not spray-and-pray." },
+                { num: "04", title: "Matched, not mass-applied", desc: "You reach employers who are actively hiring for your challenge type not spray-and-pray." },
               ].map((r) => (
                 <div key={r.num} className="proof-row">
                   <span className="proof-num">{r.num}</span>
@@ -1617,7 +1612,7 @@ export default function GaindayLanding() {
               Every candidate on Gainday has completed a real task relevant to your role.
             </p>
             <p className="deep-body">
-              You get a ranked shortlist with capability scores — not a pile of CVs to wade through. You see their reasoning before you spend a penny.
+              You get a ranked shortlist with capability scores not a pile of CVs to wade through. You see their reasoning before you spend a penny.
             </p>
             <Link href="/employers" className="deep-cta">
               Join the employer waitlist
@@ -1631,9 +1626,9 @@ export default function GaindayLanding() {
               </div>
               {[
                 { num: "01", title: "Ranked shortlist, not a pile", desc: "Candidates arrive pre-scored. You open the list, not the inbox." },
-                { num: "02", title: "Role-specific challenges", desc: "Every challenge is built from actual job requirements — not generic aptitude tests." },
+                { num: "02", title: "Role-specific challenges", desc: "Every challenge is built from actual job requirements not generic aptitude tests." },
                 { num: "03", title: "See reasoning before you commit", desc: "Read how each candidate thinks before you schedule a single call." },
-                { num: "04", title: "Structured scoring, human oversight", desc: "AI-assisted scoring with human review built in — consistent, defensible, fast." },
+                { num: "04", title: "Structured scoring, human oversight", desc: "AI-assisted scoring with human review built in consistent, defensible, fast." },
               ].map((r) => (
                 <div key={r.num} className="proof-row">
                   <span className="proof-num">{r.num}</span>
@@ -1666,7 +1661,7 @@ export default function GaindayLanding() {
                 <span className="kicker-sm">For candidates</span>
                 <h3 className="aud-h3">I&apos;m a candidate.</h3>
                 <p className="aud-desc">
-                  Skip the CV black hole. Show employers what you can actually do — through real-world challenges that reveal how you think.
+                  Skip the CV black hole. Show employers what you can actually do through real-world challenges that reveal how you think.
                 </p>
                 <ul className="aud-list">
                   <li>
@@ -1692,7 +1687,7 @@ export default function GaindayLanding() {
                 <span className="kicker-sm" style={{ borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.5)" }}>For employers</span>
                 <h3 className="aud-h3">Stop guessing from CVs.<br />Start hiring from proof.</h3>
                 <p className="aud-desc">
-                  See ranked candidates based on demonstrated capability — not formatting, buzzwords, or confidence theatre.
+                  See ranked candidates based on demonstrated capability not formatting, buzzwords, or confidence theatre.
                 </p>
                 <ul className="aud-list">
                   <li>
@@ -1733,7 +1728,7 @@ export default function GaindayLanding() {
             {[
               {
                 q: "Do I need a CV?",
-                a: "Yes. Your CV provides context. Your challenge demonstrates capability — and is the first thing employers see.",
+                a: "Yes. Your CV provides context. Your challenge demonstrates capability and is the first thing employers see.",
               },
               {
                 q: "Who creates the challenges?",
@@ -1741,7 +1736,7 @@ export default function GaindayLanding() {
               },
               {
                 q: "How are candidates scored?",
-                a: "Each submission is assessed against structured, role-specific criteria — with human oversight built in to ensure quality and fairness.",
+                a: "Each submission is assessed against structured, role-specific criteria with human oversight built in to ensure quality and fairness.",
               },
             ].map((f, i) => (
               <FadeUp key={f.q} delay={i * 60}>
@@ -1763,8 +1758,8 @@ export default function GaindayLanding() {
               Built for proof,
               <span className="cta-h2-light">not paper.</span>
             </h2>
-            <p className="cta-desc">
-              Show employers what you can actually do — not just what your CV says you&apos;ve done. Try the live challenge <strong>and</strong> get on the waitlist for what&apos;s next.
+            <p className="cta-desc font-medium">
+              Show employers what you can actually do not just what your CV says you&apos;ve done. Try the live challenge and get on the waitlist for what&apos;s next.
             </p>
             <p className="cta-eyebrow">Preview the future of hiring.</p>
           </FadeUp>
@@ -1791,10 +1786,10 @@ export default function GaindayLanding() {
           <div className="footer-top">
             <div>
               <a href="#" className="nav-logo" style={{ textDecoration: "none" }}>
-                <Image src="/assets/logo.jpeg" alt="Gainday" width={32} height={32} style={{ objectFit: "contain" }} />
+                <Image src={Logo} alt="Gainday" width={60} height={60} style={{ objectFit: "contain" }} />
               </a>
               <p className="footer-desc">
-                Built for proof, not paper. Show employers what you can actually do — not just what your CV says you&apos;ve done. London, 2026.
+                Built for proof, not paper. Show employers what you can actually do not just what your CV says you&apos;ve done. London, 2026.
               </p>
             </div>
             <div>

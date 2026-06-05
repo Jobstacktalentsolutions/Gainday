@@ -3,10 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from '@/app/assets/logo.png';
-/* ─
-   Shared Waitlist Page Gainday brand spec
-─ */
+import Logo from '@/assets/logo.png';
 
 
 type Variant = "candidates" | "employers";
