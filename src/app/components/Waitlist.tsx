@@ -2,9 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import Logo from '@/assets/logo.png';
 
+
+function Mark({ size = 22, dark = false }: { size?: number; dark?: boolean }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 22 22" fill="none">
+      <rect width="22" height="22" fill={dark ? "#fff" : "#0A0A0A"} />
+      <rect x="5" y="5" width="12" height="12" fill={dark ? "#0A0A0A" : "#fff"} />
+    </svg>
+  );
+}
 
 type Variant = "candidates" | "employers";
 
@@ -83,12 +90,43 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
     if (!isValid) return;
     setStatus("loading");
     setErrorMsg("");
-    // Simulate API call replace with your actual endpoint
-    await new Promise((r) => setTimeout(r, 1100));
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_WAITLIST;
+    const confirmId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_CONFIRM;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
     try {
-      // await fetch("/api/waitlist", { method: "POST", body: JSON.stringify({ email, variant }) })
+      const { default: emailjs } = await import("@emailjs/browser");
+
+      // 1. Notify you of the new signup
+      await emailjs.send(
+        serviceId!,
+        templateId!,
+        {
+          from_email: email.trim(),
+          variant: variant === "candidates" ? "Candidate" : "Employer",
+          submitted_at: new Date().toLocaleString("en-GB", { timeZone: "Europe/London" }),
+          to_email: "jobstacktalentsolutions@gmail.com",
+        },
+        publicKey!
+      );
+
+      // 2. Confirmation to the person who signed up
+      await emailjs.send(
+        serviceId!,
+        confirmId!,
+        {
+          to_email: email.trim(),
+          variant: variant === "candidates" ? "candidate" : "employer",
+          cta_url: "https://forms.gle/7FnnZRmJaFxBJeM38",
+        },
+        publicKey!
+      );
+
       setStatus("success");
-    } catch {
+    } catch (err) {
+      console.error("EmailJS error:", err);
       setStatus("error");
       setErrorMsg("Something went wrong. Please try again.");
     }
@@ -131,7 +169,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           -webkit-font-smoothing: antialiased;
         }
 
-        /*  NAV  */
         .wl-nav {
           position: sticky;
           top: 0;
@@ -193,7 +230,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         }
         .btn-nav:hover { background: #222; }
 
-        /*  MAIN  */
         .wl-main {
           flex: 1;
           max-width: var(--container);
@@ -206,7 +242,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           align-items: start;
         }
 
-        /* Left col */
         .wl-kicker {
           display: inline-block;
           border: 1px solid var(--line-2);
@@ -241,10 +276,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           margin-bottom: 36px;
           max-width: 460px;
         }
-        .wl-bullets {
-          list-style: none;
-          margin-bottom: 0;
-        }
+        .wl-bullets { list-style: none; margin-bottom: 0; }
         .wl-bullets li {
           display: flex;
           align-items: flex-start;
@@ -259,7 +291,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         .wl-bullets li:last-child { border-bottom: 1px solid var(--line); }
         .wl-dash { flex-shrink: 0; color: var(--ink-4); margin-top: 2px; font-size: 14px; }
 
-        /* Right col form card */
         .wl-card {
           border: 1px solid var(--line-2);
           border-radius: var(--r-card);
@@ -282,7 +313,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         }
         .wl-card-body { padding: 28px 24px; }
 
-        /* Form elements */
         .form-group { margin-bottom: 20px; }
         .form-label {
           display: block;
@@ -335,7 +365,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         }
         .btn-submit:hover:not(:disabled) { background: #222; }
         .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-
         .btn-arrow { display: inline-block; transition: transform 0.2s; }
         .btn-submit:hover:not(:disabled) .btn-arrow { transform: translateX(3px); }
 
@@ -347,7 +376,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           text-align: center;
         }
 
-        /* Spinner */
         .spinner {
           width: 16px;
           height: 16px;
@@ -359,11 +387,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Success state */
-        .success-block {
-          text-align: center;
-          padding: 8px 0 4px;
-        }
+        .success-block { text-align: center; padding: 8px 0 4px; }
         .success-icon {
           width: 48px;
           height: 48px;
@@ -407,7 +431,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         }
         .btn-outline:hover { background: var(--ink); color: #fff; }
 
-        /* Side detail items */
         .side-detail {
           margin-top: 32px;
           border: 1px solid var(--line);
@@ -446,11 +469,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           padding: 0 2px;
         }
 
-        /*  FOOTER  */
-        .wl-footer {
-          border-top: 1px solid var(--line);
-          padding: 28px 32px;
-        }
+        .wl-footer { border-top: 1px solid var(--line); padding: 28px 32px; }
         .wl-footer-inner {
           max-width: var(--container);
           margin: 0 auto;
@@ -461,22 +480,13 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
           font-weight: 500;
           color: var(--ink-4);
         }
-        .wl-footer a {
-          color: var(--ink-3);
-          text-decoration: none;
-          transition: color 0.15s;
-        }
+        .wl-footer a { color: var(--ink-3); text-decoration: none; transition: color 0.15s; }
         .wl-footer a:hover { color: var(--ink); }
 
-        /*  MOBILE  */
         @media (max-width: 860px) {
           .wl-nav-links { display: none; }
           .wl-nav-inner { padding: 0 20px; }
-          .wl-main {
-            grid-template-columns: 1fr;
-            padding: 48px 20px 72px;
-            gap: 48px;
-          }
+          .wl-main { grid-template-columns: 1fr; padding: 48px 20px 72px; gap: 48px; }
           .wl-card { position: static; }
           .wl-footer { padding: 24px 20px; }
         }
@@ -486,11 +496,11 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
       <nav className="wl-nav">
         <div className="wl-nav-inner">
           <Link href="/" className="wl-logo">
-            <Image src={Logo} alt="Gainday" width={122} height={72} style={{ objectFit: "contain" }} />
+            <Mark size={22} />
+            Gainday
           </Link>
           <ul className="wl-nav-links">
             <li><Link href="/#how-it-works">How it works</Link></li>
-            <li><Link href="/#challenge">The challenge</Link></li>
             <li><Link href="/candidates">For candidates</Link></li>
             <li><Link href="/employers">For employers</Link></li>
           </ul>
@@ -572,7 +582,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
                       required
                     />
                   </div>
-
                   <button
                     type="submit"
                     className="btn-submit"
@@ -590,7 +599,6 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
                       </>
                     )}
                   </button>
-
                   {status === "error" && (
                     <p className="form-error">{errorMsg}</p>
                   )}
@@ -605,9 +613,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
       <footer className="wl-footer">
         <div className="wl-footer-inner">
           <span>© 2026 Gainday Ltd. All rights reserved.</span>
-          <span>
-            <Link href="/">← Back to home</Link>
-          </span>
+          <span><Link href="/">← Back to home</Link></span>
         </div>
       </footer>
     </div>

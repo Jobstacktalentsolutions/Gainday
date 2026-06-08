@@ -2,8 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import  Logo  from "../assets/logo.png";
+
+
+/* ─────────────────────────────────────────────
+   Gainday Landing Page brand spec v1
+   Font: Raleway 200-800
+   Palette: strictly B&W per spec
+───────────────────────────────────────────── */
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -49,209 +54,6 @@ function Mark({ size = 22, dark = false }: { size?: number; dark?: boolean }) {
 }
 
 
-/* ── PREVIEW FLOW COMPONENT ── */
-type PreviewTab = "job" | "challenge" | "scorecard";
-
-function PreviewFlow() {
-  const [tab, setTab] = useState<PreviewTab>("job");
-  const [submitted, setSubmitted] = useState(false);
-  const [answer, setAnswer] = useState("");
-
-  return (
-    <div style={{ border: "1px solid var(--line-2)", borderRadius: "var(--r-card)", overflow: "hidden", boxShadow: "var(--shadow-card)", background: "var(--bg)" }}>
-
-      {/* Tab bar */}
-      <div style={{ display: "flex", borderBottom: "1px solid var(--line)", background: "var(--tint)" }}>
-        {([
-          { key: "job", label: "Job post" },
-          { key: "challenge", label: "Challenge" },
-          { key: "scorecard", label: "Score card" },
-        ] as { key: PreviewTab; label: string }[]).map((t) => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            style={{
-              flex: 1, padding: "12px 8px", background: "none", border: "none",
-              borderBottom: tab === t.key ? "2px solid var(--ink)" : "2px solid transparent",
-              fontFamily: "inherit", fontSize: "11px", fontWeight: 600,
-              letterSpacing: "0.10em", textTransform: "uppercase",
-              color: tab === t.key ? "var(--ink)" : "var(--ink-4)",
-              cursor: "pointer", transition: "color 0.15s",
-            }}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      {/* ── TAB: Job post ── */}
-      {tab === "job" && (
-        <div style={{ padding: "22px 22px 24px" }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 10 }}>Example role</div>
-          <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: "-0.01em", marginBottom: 4 }}>Finance Assistant</div>
-          <div style={{ fontSize: 12, fontWeight: 500, color: "var(--ink-4)", marginBottom: 16 }}>Infrastructure firm · London · Junior</div>
-          <div style={{ fontSize: 13.5, fontWeight: 400, color: "var(--ink-3)", lineHeight: 1.6, marginBottom: 16 }}>
-            Support the delivery of major UK infrastructure projects by helping manage invoices, supplier payments, financial records, and project reporting.
-          </div>
-          <div style={{ fontSize: 11.5, fontWeight: 600, color: "var(--ink-3)", marginBottom: 8 }}>You&apos;ll work with project and finance teams to:</div>
-          {["Process invoices and supplier records", "Resolve payment queries", "Support monthly financial reporting", "Maintain accurate timesheet and finance data", "Use Excel and finance systems to track project costs"].map((b) => (
-            <div key={b} style={{ display: "flex", gap: 8, fontSize: 13, fontWeight: 400, color: "var(--ink-3)", lineHeight: 1.5, marginBottom: 5 }}>
-              <span style={{ flexShrink: 0, color: "var(--ink-4)" }}>—</span><span>{b}</span>
-            </div>
-          ))}
-          <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink)", margin: "16px 0 8px" }}>What they&apos;re looking for</div>
-          {["Strong organisation and attention to detail", "Good Excel and data handling skills", "Clear communication and problem-solving"].map((b) => (
-            <div key={b} style={{ display: "flex", gap: 8, fontSize: 13, fontWeight: 400, color: "var(--ink-3)", lineHeight: 1.5, marginBottom: 5 }}>
-              <span style={{ flexShrink: 0, color: "var(--ink-4)" }}>—</span><span>{b}</span>
-            </div>
-          ))}
-          <button
-            onClick={() => setTab("challenge")}
-            style={{ marginTop: 20, display: "inline-flex", alignItems: "center", gap: 6, background: "var(--ink)", color: "#fff", border: "none", borderRadius: "var(--r-btn)", padding: "11px 18px", fontFamily: "inherit", fontSize: 13, fontWeight: 600, cursor: "pointer" }}
-          >
-            See the challenge →
-          </button>
-        </div>
-      )}
-
-      {/* ── TAB: Challenge ── */}
-      {tab === "challenge" && !submitted && (
-        <div style={{ padding: "22px 22px 24px" }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 12 }}>The challenge</div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--ink-3)", marginBottom: 4 }}>Role: Junior Finance Analyst London Fintech Startup</div>
-          <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink)", margin: "14px 0 6px" }}>Your manager sends you this message:</div>
-          <p style={{ fontSize: 13.5, fontWeight: 400, color: "var(--ink-2)", lineHeight: 1.65, fontStyle: "italic", marginBottom: 16, borderLeft: "3px solid var(--line-2)", paddingLeft: 12 }}>
-            &quot;Hey I&apos;ve pulled last month&apos;s numbers quickly. Can you take a look and tell me: which figure looks wrong, why you think that, and what you&apos;d do next? Just a few sentences is fine.&quot;
-          </p>
-          <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink)", marginBottom: 10 }}>Last month&apos;s snapshot:</div>
-          <div style={{ border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", marginBottom: 16 }}>
-            {[
-              { label: "Revenue", value: "£85,000", strong: false },
-              { label: "Cost of goods sold", value: "£12,000", strong: false },
-              { label: "Gross profit", value: "£61,000", strong: true },
-              { label: "Operating expenses", value: "£18,000", strong: false },
-              { label: "Net profit", value: "£43,000", strong: true },
-            ].map((r, i, a) => (
-              <div key={r.label} style={{ display: "flex", justifyContent: "space-between", padding: "10px 14px", borderBottom: i < a.length - 1 ? "1px solid var(--line)" : "none", fontSize: 13.5, fontWeight: r.strong ? 700 : 500, color: r.strong ? "var(--ink)" : "var(--ink-2)", fontVariantNumeric: "tabular-nums" }}>
-                <span>{r.label}</span><span>{r.value}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink)", marginBottom: 6 }}>Answer box:</div>
-          <p style={{ fontSize: 13, color: "var(--ink-4)", fontStyle: "italic", marginBottom: 10 }}>What looks wrong, why, and what would you do next? Write in 3–5 sentences.</p>
-          <textarea
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            placeholder="Type your answer here..."
-            style={{ width: "100%", minHeight: 72, border: "1.5px dashed var(--line-2)", borderRadius: 7, background: "var(--tint)", padding: "11px 13px", fontFamily: "inherit", fontSize: 13.5, color: "var(--ink-2)", resize: "none", outline: "none", marginBottom: 14 }}
-          />
-          <button
-            onClick={() => { if (answer.trim().length > 10) setSubmitted(true); }}
-            style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "var(--ink)", color: "#fff", border: "none", borderRadius: "var(--r-btn)", padding: "12px 20px", fontFamily: "inherit", fontSize: 13.5, fontWeight: 600, cursor: answer.trim().length > 10 ? "pointer" : "not-allowed", opacity: answer.trim().length > 10 ? 1 : 0.45, transition: "opacity 0.15s" }}
-          >
-            See how you scored →
-          </button>
-        </div>
-      )}
-
-      {/* ── TAB: Challenge submitted state ── */}
-      {tab === "challenge" && submitted && (
-        <div style={{ padding: "22px 22px 24px", textAlign: "center" }}>
-          <div style={{ width: 44, height: 44, background: "var(--ink)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-          </div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "var(--ink)", marginBottom: 8 }}>Submitted.</div>
-          <p style={{ fontSize: 13.5, color: "var(--ink-3)", marginBottom: 20 }}>In the real product, your submission is scored and added to your candidate profile.</p>
-          <button onClick={() => setTab("scorecard")} style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "var(--ink)", color: "#fff", border: "none", borderRadius: "var(--r-btn)", padding: "11px 18px", fontFamily: "inherit", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
-            See your score card →
-          </button>
-        </div>
-      )}
-
-      {/* ── TAB: Score card ── */}
-      {tab === "scorecard" && (
-        <div style={{ padding: "22px 22px 24px" }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 4 }}>Candidate profile as seen by employer</div>
-          <div style={{ fontSize: 12, fontWeight: 400, fontStyle: "italic", color: "var(--ink-4)", marginBottom: 14 }}>Name and contact details hidden until unlocked</div>
-
-          {/* Meta row */}
-          <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap" }}>
-            {[
-              { label: "Field", value: "Finance" },
-              { label: "Challenges", value: "3" },
-              { label: "Capability", value: "Top 18%" },
-            ].map((m) => (
-              <div key={m.label} style={{ border: "1px solid var(--line)", borderRadius: 7, padding: "9px 13px", flex: 1, minWidth: 70 }}>
-                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", color: "var(--ink-4)", marginBottom: 3 }}>{m.label}</div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.01em" }}>{m.value}</div>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ fontSize: 12, color: "var(--ink-3)", fontStyle: "italic", marginBottom: 16, lineHeight: 1.55 }}>
-            This candidate outperformed 82% of everyone who has attempted this challenge type.
-          </div>
-
-          {/* Score breakdown */}
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", color: "var(--ink)", marginBottom: 10 }}>Score breakdown</div>
-          {[
-            { dim: "Task Accuracy", score: 23, max: 25 },
-            { dim: "Reasoning Quality", score: 21, max: 25 },
-            { dim: "Communication", score: 22, max: 25 },
-            { dim: "Originality", score: 19, max: 25 },
-          ].map((r) => (
-            <div key={r.dim} style={{ marginBottom: 10 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12.5, fontWeight: 500, color: "var(--ink-2)", marginBottom: 4 }}>
-                <span>{r.dim}</span>
-                <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{r.score}/{r.max}</span>
-              </div>
-              <div style={{ height: 4, background: "var(--line)", borderRadius: 2, overflow: "hidden" }}>
-                <div style={{ height: "100%", background: "var(--ink)", borderRadius: 2, width: `${(r.score / r.max) * 100}%` }} />
-              </div>
-            </div>
-          ))}
-          <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid var(--line)", paddingTop: 10, marginTop: 4, marginBottom: 16 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--ink)" }}>Total</span>
-            <span style={{ fontSize: 13, fontWeight: 800, color: "var(--ink)", fontVariantNumeric: "tabular-nums" }}>85 / 100</span>
-          </div>
-
-          {/* Score trajectory */}
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", color: "var(--ink)", marginBottom: 8 }}>Score trajectory</div>
-          <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-            {[
-              { label: "Challenge 1", value: "Top 45%" },
-              { label: "Challenge 2", value: "Top 31%" },
-              { label: "Challenge 3", value: "Top 18% ↑" },
-            ].map((t) => (
-              <div key={t.label} style={{ flex: 1, border: "1px solid var(--line)", borderRadius: 6, padding: "8px 10px", textAlign: "center" }}>
-                <div style={{ fontSize: 9.5, fontWeight: 600, color: "var(--ink-4)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 3 }}>{t.label}</div>
-                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--ink)" }}>{t.value}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ fontSize: 12, color: "var(--ink-4)", fontStyle: "italic", marginBottom: 14 }}>Consistent improvement across 3 challenges.</div>
-
-          {/* Submission preview */}
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", color: "var(--ink)", marginBottom: 8 }}>Submission preview</div>
-          <div style={{ background: "var(--tint)", border: "1px solid var(--line)", borderRadius: 8, padding: "12px 14px", fontSize: 13, color: "var(--ink-2)", lineHeight: 1.65, fontStyle: "italic", marginBottom: 16 }}>
-            &quot;The gross profit figure looks incorrect revenue of £85,000 minus COGS of £12,000 should give £73,000, not £61,000. This suggests either a data entry error or an unrecorded cost of around £12,000. I&apos;d flag this to the finance manager immediately and cross-check against the raw transaction data before month-end reporting.&quot;
-          </div>
-
-          {/* Unlock CTA */}
-          <div style={{ borderTop: "1px solid var(--line)", paddingTop: 16, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--ink)" }}>Unlock full profile</div>
-              <div style={{ fontSize: 12, color: "var(--ink-4)" }}>Contact details, CV, full submission</div>
-            </div>
-            <button style={{ background: "var(--ink)", color: "#fff", border: "none", borderRadius: "var(--r-btn)", padding: "10px 16px", fontFamily: "inherit", fontSize: 12.5, fontWeight: 600, cursor: "pointer" }}>
-              £50 →
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default function GaindayLanding() {
   const [answer, setAnswer] = useState("");
@@ -749,183 +551,6 @@ export default function GaindayLanding() {
           letter-spacing: -0.005em;
         }
 
-        /* ── CHALLENGE BAND ── */
-        .band {
-          background: var(--tint);
-          border-top: 1px solid var(--line);
-          border-bottom: 1px solid var(--line);
-        }
-        .band-inner {
-          max-width: var(--container);
-          margin: 0 auto;
-          padding: 96px 32px;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 72px;
-          align-items: start;
-        }
-        .band-h2 {
-          font-size: clamp(34px, 3.2vw, 48px);
-          font-weight: 700;
-          line-height: 1.07;
-          letter-spacing: -0.025em;
-          color: var(--ink);
-          margin-bottom: 20px;
-        }
-        .band-h2-light {
-          font-weight: 300;
-          color: var(--ink-2);
-          display: block;
-        }
-        .band-desc {
-          font-size: 15.5px;
-          font-weight: 400;
-          color: var(--ink-3);
-          line-height: 1.65;
-          margin-bottom: 32px;
-        }
-        .meta-pair {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-          margin-bottom: 32px;
-          align-items: stretch;
-        }
-        .meta-box {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-        .meta-box {
-          border: 1px solid var(--line);
-          border-radius: var(--r-btn);
-          padding: 16px 20px;
-          background: var(--bg);
-        }
-        .meta-lbl {
-          font-size: 11.5px;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: var(--ink-4);
-          margin-bottom: 7px;
-        }
-        .meta-val {
-          font-size: 17px;
-          font-weight: 700;
-          letter-spacing: -0.01em;
-          color: var(--ink);
-        }
-        .form-note {
-          font-size: 12.5px;
-          font-weight: 500;
-          color: var(--ink-4);
-          margin-top: 12px;
-          letter-spacing: 0.005em;
-        }
-
-        /* Memo card */
-        .memo-card {
-          background: var(--bg);
-          border: 1px solid var(--line-2);
-          border-radius: var(--r-card);
-          overflow: hidden;
-          box-shadow: var(--shadow-card);
-        }
-        .memo-head {
-          background: var(--tint);
-          border-bottom: 1px solid var(--line);
-          padding: 14px 20px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        .avatar {
-          width: 32px;
-          height: 32px;
-          background: var(--ink);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-size: 13px;
-          font-weight: 700;
-          flex-shrink: 0;
-        }
-        .memo-from {
-          font-size: 14px;
-          font-weight: 600;
-          color: var(--ink);
-          letter-spacing: -0.005em;
-        }
-        .memo-time {
-          font-size: 12.5px;
-          font-weight: 400;
-          color: var(--ink-4);
-          margin-left: 3px;
-        }
-        .memo-tag-label {
-          margin-left: auto;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: var(--ink-4);
-        }
-        .memo-body { padding: 22px 22px; }
-        .memo-from-lbl {
-          font-size: 11.5px;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: var(--ink-4);
-          margin-bottom: 12px;
-        }
-        .memo-body p {
-          font-size: 14.5px;
-          font-weight: 400;
-          color: var(--ink-2);
-          line-height: 1.65;
-          margin-bottom: 18px;
-        }
-        .memo-body p strong { font-weight: 600; color: var(--ink); }
-        .memo-divider { border: none; border-top: 1px solid var(--line); margin: 16px 0; }
-        .task-label {
-          font-size: 13.5px;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          color: var(--ink);
-          margin-bottom: 8px;
-        }
-        .task-desc {
-          font-size: 14px;
-          font-weight: 400;
-          color: var(--ink-3);
-          line-height: 1.6;
-          margin-bottom: 16px;
-        }
-        .answer-box {
-          width: 100%;
-          min-height: 80px;
-          border: 1.5px dashed var(--line-2);
-          border-radius: 7px;
-          background: var(--tint);
-          padding: 13px 15px;
-          font-family: inherit;
-          font-size: 14px;
-          font-weight: 400;
-          color: var(--ink-2);
-          resize: none;
-          outline: none;
-          transition: border-color 0.15s, background 0.15s;
-          line-height: 1.55;
-        }
-        .answer-box::placeholder { color: var(--line-2); }
-        .answer-box:focus { border-color: var(--ink-4); background: var(--bg); }
-
-
         /* ── DEEP DIVE SECTIONS ── */
         .deep-section {
           padding: 96px 0;
@@ -1339,11 +964,12 @@ export default function GaindayLanding() {
       <nav className="nav">
         <div className="nav-inner">
           <a href="#" className="nav-logo">
-            <Image src={Logo} alt="Gainday" width={65} height={3} style={{ objectFit: "contain" }} />
+            <Mark size={22} />
+            Gainday
           </a>
           <ul className="nav-links">
             <li><a href="#how-it-works">How it works</a></li>
-            <li><a href="#challenge">The challenge</a></li>
+
             <li><Link href="/candidates">For candidates</Link></li>
             <li><Link href="/employers">For employers</Link></li>
           </ul>
@@ -1478,7 +1104,7 @@ export default function GaindayLanding() {
                   </svg>
                 ),
                 title: "Real work, not keyword matching",
-                desc: "Candidates complete a role-based challenge built from actual job tasks. Not a quiz, not a keyword filter.",
+                desc: "Candidates complete a role-based challenge built from actual job tasks not a quiz, not a keyword filter.",
                 delay: 0,
               },
               {
@@ -1518,41 +1144,6 @@ export default function GaindayLanding() {
                 Most early-career hiring still relies on CVs, keywords, and luck. Gainday replaces that with proof: candidates complete a role-specific challenge as their application, performance is scored, and employers see a ranked list of people who&apos;ve already shown they can do the work.
               </p>
             </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* ── CHALLENGE BAND ── */}
-      <section className="band" id="challenge">
-        <div className="band-inner">
-          <FadeUp delay={0}>
-            <span className="kicker-sm">Reduce bias. Increase signal.</span>
-            <h2 className="band-h2">
-              See what hiring feels like when proof comes first.
-              <span className="band-h2-light">Try the 3-minute challenge.</span>
-            </h2>
-            <p className="band-desc">
-              You&apos;ve just joined a small London startup as a junior finance assistant. Your manager pings you the numbers and asks you what you think. You have a blank box and a few minutes show, on the record, how you think.
-            </p>
-            <div className="meta-pair">
-              <div className="meta-box">
-                <div className="meta-lbl">Format</div>
-                <div className="meta-val">Short answer</div>
-              </div>
-              <div className="meta-box">
-                <div className="meta-lbl">Level</div>
-                <div className="meta-val">Junior</div>
-              </div>
-            </div>
-            <a href="https://forms.gle/7FnnZRmJaFxBJeM38" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: "inline-flex" }}>
-              Start the challenge
-              <span className="btn-arrow">→</span>
-            </a>
-            <p className="form-note">Opens in a Google Form. No sign-up required.</p>
-          </FadeUp>
-
-          <FadeUp delay={140}>
-            <PreviewFlow />
           </FadeUp>
         </div>
       </section>
@@ -1758,8 +1349,8 @@ export default function GaindayLanding() {
               Built for proof,
               <span className="cta-h2-light">not paper.</span>
             </h2>
-            <p className="cta-desc font-medium">
-              Show employers what you can actually do not just what your CV says you&apos;ve done. Try the live challenge and get on the waitlist for what&apos;s next.
+            <p className="cta-desc">
+              Show employers what you can actually do not just what your CV says you&apos;ve done. Try the live challenge <strong>and</strong> get on the waitlist for what&apos;s next.
             </p>
             <p className="cta-eyebrow">Preview the future of hiring.</p>
           </FadeUp>
@@ -1786,7 +1377,8 @@ export default function GaindayLanding() {
           <div className="footer-top">
             <div>
               <a href="#" className="nav-logo" style={{ textDecoration: "none" }}>
-                <Image src={Logo} alt="Gainday" width={60} height={60} style={{ objectFit: "contain" }} />
+                <Mark size={22} />
+                Gainday
               </a>
               <p className="footer-desc">
                 Built for proof, not paper. Show employers what you can actually do not just what your CV says you&apos;ve done. London, 2026.
@@ -1797,7 +1389,7 @@ export default function GaindayLanding() {
               <ul className="footer-links">
                 {[
                   { label: "How it works", href: "#how-it-works" },
-                  { label: "Try a challenge", href: "#challenge" },
+                  { label: "Try a challenge", href: "https://forms.gle/7FnnZRmJaFxBJeM38" },
                   { label: "For candidates", href: "/candidates" },
                   { label: "For employers", href: "/employers" },
                 ].map((l) => (
