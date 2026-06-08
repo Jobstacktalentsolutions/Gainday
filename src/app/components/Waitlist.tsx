@@ -92,7 +92,7 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
     setErrorMsg("");
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_WAITLIST;
+    const notifyId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_NOTIFY;
     const confirmId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_CONFIRM;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
@@ -102,12 +102,12 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
       // 1. Notify you of the new signup
       await emailjs.send(
         serviceId!,
-        templateId!,
+        notifyId!,
         {
           from_email: email.trim(),
+          to_email: "jobstacktalentsolutions@gmail.com",
           variant: variant === "candidates" ? "Candidate" : "Employer",
           submitted_at: new Date().toLocaleString("en-GB", { timeZone: "Europe/London" }),
-          to_email: "jobstacktalentsolutions@gmail.com",
         },
         publicKey!
       );
@@ -118,8 +118,9 @@ export default function WaitlistPage({ variant }: WaitlistPageProps) {
         confirmId!,
         {
           to_email: email.trim(),
+          name: email.trim(),
           variant: variant === "candidates" ? "candidate" : "employer",
-          cta_url: "https://forms.gle/7FnnZRmJaFxBJeM38",
+          cta_url: "https://gainday.org/candidates",
         },
         publicKey!
       );

@@ -57,6 +57,59 @@ function Mark({ size = 22, dark = false }: { size?: number; dark?: boolean }) {
 
 export default function GaindayLanding() {
   const [answer, setAnswer] = useState("");
+  const [showChallengeModal, setShowChallengeModal] = useState(false);
+  const [challengeEmail, setChallengeEmail] = useState("");
+  const [challengeEmailSending, setChallengeEmailSending] = useState(false);
+  const [challengeEmailSent, setChallengeEmailSent] = useState(false);
+  const [challengeEmailError, setChallengeEmailError] = useState("");
+
+  const isChallengeEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(challengeEmail.trim());
+
+  async function handleChallengeSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!isChallengeEmailValid) return;
+    setChallengeEmailSending(true);
+    setChallengeEmailError("");
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const confirmId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_CONFIRM;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    try {
+      if (serviceId && confirmId && publicKey) {
+        const { default: emailjs } = await import("@emailjs/browser");
+        await emailjs.send(
+          serviceId,
+          confirmId,
+          {
+            to_email: challengeEmail.trim(),
+            name: challengeEmail.trim(),
+            variant: "candidate",
+            cta_url: "https://forms.gle/7FnnZRmJaFxBJeM38",
+          },
+          publicKey
+        );
+      }
+      setChallengeEmailSent(true);
+      // Open Google Form after short delay
+      setTimeout(() => {
+        window.open("https://forms.gle/7FnnZRmJaFxBJeM38", "_blank");
+        setShowChallengeModal(false);
+        setChallengeEmailSent(false);
+        setChallengeEmail("");
+      }, 1200);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setChallengeEmailError("Something went wrong. Please try again.");
+    } finally {
+      setChallengeEmailSending(false);
+    }
+  }
+
+  function openChallengeModal(e: React.MouseEvent) {
+    e.preventDefault();
+    setShowChallengeModal(true);
+  }
 
   return (
     <div className="gd">
@@ -938,6 +991,164 @@ export default function GaindayLanding() {
           color: var(--ink-4);
         }
 
+
+        /* ── CHALLENGE MODAL ── */
+        .modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(10,10,10,0.6);
+          backdrop-filter: blur(4px);
+          z-index: 999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-card {
+          background: var(--bg);
+          border: 1px solid var(--line-2);
+          border-radius: var(--r-card);
+          padding: 36px;
+          max-width: 460px;
+          width: 100%;
+          box-shadow: 0 24px 64px -12px rgba(0,0,0,0.4);
+          animation: slideUp 0.25s cubic-bezier(.2,.7,.2,1);
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-close {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: var(--ink-4);
+          font-size: 20px;
+          line-height: 1;
+          padding: 4px;
+          transition: color 0.15s;
+        }
+        .modal-close:hover { color: var(--ink); }
+        .modal-kicker {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--ink-4);
+          margin-bottom: 10px;
+        }
+        .modal-h2 {
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          color: var(--ink);
+          margin-bottom: 10px;
+          line-height: 1.1;
+        }
+        .modal-sub {
+          font-size: 14.5px;
+          font-weight: 400;
+          color: var(--ink-3);
+          line-height: 1.6;
+          margin-bottom: 24px;
+        }
+        .modal-input {
+          width: 100%;
+          border: 1px solid var(--line-2);
+          border-radius: var(--r-btn);
+          padding: 13px 16px;
+          font-family: inherit;
+          font-size: 15px;
+          font-weight: 400;
+          color: var(--ink);
+          background: var(--bg);
+          outline: none;
+          margin-bottom: 12px;
+          transition: border-color 0.15s, box-shadow 0.15s;
+          -webkit-appearance: none;
+        }
+        .modal-input::placeholder { color: var(--line-2); }
+        .modal-input:focus {
+          border-color: var(--ink);
+          box-shadow: 0 0 0 3px rgba(10,10,10,0.06);
+        }
+        .modal-btn {
+          width: 100%;
+          background: var(--ink);
+          color: #fff;
+          border: 1px solid var(--ink);
+          padding: 14px 24px;
+          border-radius: var(--r-btn);
+          font-family: inherit;
+          font-size: 14.5px;
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          transition: background 0.2s, opacity 0.2s;
+        }
+        .modal-btn:hover:not(:disabled) { background: #222; }
+        .modal-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .modal-skip {
+          display: block;
+          text-align: center;
+          margin-top: 12px;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--ink-4);
+          cursor: pointer;
+          background: none;
+          border: none;
+          font-family: inherit;
+          transition: color 0.15s;
+          width: 100%;
+        }
+        .modal-skip:hover { color: var(--ink); }
+        .modal-error {
+          font-size: 12.5px;
+          color: #c0392b;
+          margin-top: 8px;
+          text-align: center;
+        }
+        .modal-success {
+          text-align: center;
+          padding: 8px 0;
+        }
+        .modal-success-icon {
+          width: 44px;
+          height: 44px;
+          background: var(--ink);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 14px;
+        }
+        .modal-success-text {
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--ink);
+          margin-bottom: 6px;
+        }
+        .modal-success-sub {
+          font-size: 13.5px;
+          color: var(--ink-3);
+        }
+        .modal-spinner {
+          width: 15px;
+          height: 15px;
+          border: 2px solid rgba(255,255,255,0.3);
+          border-top-color: #fff;
+          border-radius: 50%;
+          animation: spin 0.7s linear infinite;
+          flex-shrink: 0;
+        }
+
         /* ── MOBILE ── */
         @media (max-width: 900px) {
           .nav-links { display: none; }
@@ -960,6 +1171,68 @@ export default function GaindayLanding() {
         }
       `}</style>
 
+
+      {/* ── CHALLENGE EMAIL MODAL ── */}
+      {showChallengeModal && (
+        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowChallengeModal(false); }}>
+          <div className="modal-card" style={{ position: "relative" }}>
+            <button className="modal-close" onClick={() => setShowChallengeModal(false)}>✕</button>
+            {challengeEmailSent ? (
+              <div className="modal-success">
+                <div className="modal-success-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </div>
+                <div className="modal-success-text">Opening the challenge...</div>
+                <p className="modal-success-sub">Your scorecard will be sent to {challengeEmail}</p>
+              </div>
+            ) : (
+              <form onSubmit={handleChallengeSubmit} noValidate>
+                <div className="modal-kicker">Before you start</div>
+                <h2 className="modal-h2">Where should we send your scorecard?</h2>
+                <p className="modal-sub">
+                  Enter your email and we&apos;ll send your results after you submit the challenge. Takes 30 seconds to score.
+                </p>
+                <input
+                  type="email"
+                  className="modal-input"
+                  placeholder="you@example.com"
+                  value={challengeEmail}
+                  onChange={(e) => setChallengeEmail(e.target.value)}
+                  autoComplete="email"
+                  autoFocus
+                />
+                {challengeEmailError && (
+                  <p className="modal-error">{challengeEmailError}</p>
+                )}
+                <button
+                  type="submit"
+                  className="modal-btn"
+                  disabled={!isChallengeEmailValid || challengeEmailSending}
+                >
+                  {challengeEmailSending ? (
+                    <><span className="modal-spinner" /> Sending...</>
+                  ) : (
+                    <>Continue to challenge <span style={{ display: "inline-block", transition: "transform 0.2s" }}>→</span></>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className="modal-skip"
+                  onClick={() => {
+                    window.open("https://forms.gle/7FnnZRmJaFxBJeM38", "_blank");
+                    setShowChallengeModal(false);
+                  }}
+                >
+                  Skip just open the challenge
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* ── NAV ── */}
       <nav className="nav">
         <div className="nav-inner">
@@ -973,7 +1246,7 @@ export default function GaindayLanding() {
             <li><Link href="/candidates">For candidates</Link></li>
             <li><Link href="/employers">For employers</Link></li>
           </ul>
-          <a href="https://forms.gle/7FnnZRmJaFxBJeM38" target="_blank" rel="noopener noreferrer" className="btn-nav">Try a challenge</a>
+          <button onClick={openChallengeModal} className="btn-nav">Try a challenge</button>
         </div>
       </nav>
 
@@ -994,10 +1267,10 @@ export default function GaindayLanding() {
               <strong>role-based challenges</strong> built for real hiring.
             </p>
             <div className="hero-actions">
-              <a href="https://forms.gle/7FnnZRmJaFxBJeM38" target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <button onClick={openChallengeModal} className="btn-primary">
                 Try a challenge (Demo)
                 <span className="btn-arrow">→</span>
-              </a>
+              </button>
               <Link href="/employers" className="btn-outline">For employers</Link>
             </div>
             <div className="hero-proof">
@@ -1357,11 +1630,11 @@ export default function GaindayLanding() {
           <FadeUp delay={120}>
             <div className="cta-btns">
               {[
-                { label: "Try a challenge (Demo)", href: "https://forms.gle/7FnnZRmJaFxBJeM38" },
+                { label: "Try a challenge (Demo)", href: "#", onClick: openChallengeModal },
                 { label: "Join candidate waitlist", href: "/candidates" },
                 { label: "Join employer waitlist", href: "/employers" },
               ].map((b) => (
-                <a key={b.label} href={b.href} className="cta-row-btn">
+                <a key={b.label} href={b.href} className="cta-row-btn" onClick={b.onClick}>
                   {b.label}
                   <span className="btn-arrow">→</span>
                 </a>
@@ -1389,11 +1662,11 @@ export default function GaindayLanding() {
               <ul className="footer-links">
                 {[
                   { label: "How it works", href: "#how-it-works" },
-                  { label: "Try a challenge", href: "https://forms.gle/7FnnZRmJaFxBJeM38" },
+                  { label: "Try a challenge", href: "#", onClick: openChallengeModal },
                   { label: "For candidates", href: "/candidates" },
                   { label: "For employers", href: "/employers" },
                 ].map((l) => (
-                  <li key={l.label}><Link href={l.href}>{l.label}</Link></li>
+                  <li key={l.label}><a href={l.href} onClick={l.onClick} style={{ textDecoration: "none", fontSize: 14, fontWeight: 400, color: "var(--ink-3)", transition: "color 0.15s" }}>{l.label}</a></li>
                 ))}
               </ul>
             </div>
